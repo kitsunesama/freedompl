@@ -1,0 +1,420 @@
+
+//----------------------------------------
+//                common
+//----------------------------------------
+//-----------------------------
+//   foundation forms
+//-----------------------------
+.foundation_form {
+
+   $include-html-form-classes : true;
+   $input-font-size: emCalc(12px);
+   @import "foundation/components/forms"; 
+}
+
+
+//----------------------------------------
+//              top menu
+//----------------------------------------
+#fpl_top_menu ul {
+
+   font-family: #{$georgia-family};
+   font-style: italic;
+   
+   @include delimited-list(" |");
+ 
+   @include deco_anchor($color-dark-gray);
+   
+}
+
+//------------------------------------
+//       top mail widget
+//------------------------------------
+
+#fpl_top_mail {
+
+   font-family: #{$tahoma-family};
+
+   @include deco_anchor($color-dark-gray);
+   
+   #fpl_top_mail_icon {     
+	  margin-top: sprite-top-margin( $top-line-mul, mail);
+  }
+
+}	  
+
+//------------------------------------
+//       top search widget
+//------------------------------------
+   #fpl_search {
+   
+
+	  #{nth($top-search-button,1)} {	    
+	     @include picture_button;
+	  }
+   }
+
+//----------------------------------------
+//           banner block
+//----------------------------------------
+#fpl_top_banner {
+
+   #fpl_banner_contacts_text {
+     
+	  font-family: #{$times-family};
+	  color: $color-white;
+	  text-align: right;
+	  
+	  @include text-shadow(rgba($color-black, 1) 5px 5px 8px);
+	  
+	  .address {
+	     font-size: 1.5em;
+		 margin-bottom: 30px;
+	  }
+	  .phone {
+	     font-size: 1.9em;
+		 font-weight: bold;
+	  }	  
+   }  
+}
+
+//----------------------------------------
+//          left main menu
+//----------------------------------------
+@each $menu in $main_menus {
+
+   ##{$menu} {
+       ul {
+	       font-family: #{$georgia-family};
+           font-weight: bold;
+           text-transform: uppercase;
+		   
+           $z : "arrow.gif";       
+           @include pretty-bullets-r($z, $p-line-height); 	
+  	   
+		   @include deco_anchor($color-bordo, $color-light-bordo);
+		   @include block_anchor;
+		   
+       }
+	   
+	   ul.root-item {
+	      display: none;
+	   }
+   } 
+}
+
+//------------------------------------
+//       news on main page
+//------------------------------------
+.horz_photo_widget {
+
+   .widget_item {
+   
+      font-family: #{$verdana-family};
+   
+      @if $global-debug-mode {
+         outline: solid 1px red;
+	  }
+	   
+      .widget_date {
+	  }
+	  .widget_picture {
+	  
+	     height: $image-area-height;
+	     a {
+		    @include thumb;		
+		 }
+	  }
+	  .widget_text {
+         @include deco_anchor(inherit, inherit);	  	   
+	  }
+   }
+}
+
+//----------------------------------------
+//          left faq menu
+//----------------------------------------
+#fpl_faq_menu {
+
+    h1, h3 {
+	   @include uppercase_header($color-black);
+	}
+    ul {
+
+       font-family: #{$georgia-family};    
+       text-transform: uppercase;
+	
+	   @include deco_anchor($color-black);
+	}   
+}
+
+//----------------------------------------
+//          left dynamic menu
+//----------------------------------------
+#fpl_dynamic_menu  {
+
+     h1, h3 {
+	   @include uppercase_header($color-black);
+	 }
+
+   	 font-family: #{$georgia-family};
+     font-weight: bold;
+  
+	 @include deco_anchor($color-bordo);	 
+}
+
+
+
+//----------------------------------------
+//            footer menu
+//----------------------------------------
+#fpl_footer_menu ul {
+
+   font-family: #{$tahoma-family};
+   @include deco_anchor($color-light-gray);
+}
+
+//----------------------------------------
+//            footer social
+//----------------------------------------
+#fpl_footer_social_icons {
+
+   
+}
+
+//----------------------------------------
+//          footer copyright
+//----------------------------------------
+#fpl_footer_copyright {
+   
+   font-family: #{$tahoma-family};
+
+   color: $color-light-gray;
+   text-align: center;
+}
+
+
+//-------------------------------------------------------------------------
+//                         page contents
+//-------------------------------------------------------------------------
+.content_typo_class {
+
+   font-family: #{$verdana-family};
+
+   h1, h2 {
+      font-family: #{$times-family};	  
+	  color: $color-dark-violet;     
+   }
+   
+   h3 {
+      font-family: #{$georgia-family};	  
+	  color: $color-dark-violet; 
+   }   
+   
+   #{headings(1,6)} { 
+      @include deco_anchor(inherit, inherit);    
+   }
+   
+   @include deco_anchor($color-bordo, $color-red);
+   
+}
+//----------------------------------------
+//             all pages
+//----------------------------------------
+#fpl_content_wrap {
+
+   @extend .content_typo_class;
+   
+   font, b, strong {
+      font-family: inherit;
+	  font-size: inherit;
+      color: inherit;
+   }
+   
+   
+   @if $global-debug-mode {
+      overflow: visible!important;
+   }
+}
+
+//----------------------------------------
+//              main page
+//----------------------------------------
+#fpl_content_wrap_main {
+
+   @extend .content_typo_class;
+
+   @if $global-debug-mode {
+      div {
+         outline: solid 1px red;
+	  }
+   }  
+   
+   h3 {    
+	  text-transform: uppercase;
+   }
+   
+   h3.special {
+       color: $color-bright-bordo;   
+   }
+   
+   .widget_block {
+      @include min-height( $main-content-widget-min-height);
+   }
+}
+
+
+/*-----------------------------------------------------
+      content page logo-header layout
+-----------------------------------------------------*/
+//--------------------------------------
+//          dark logo
+//--------------------------------------
+#dance_school_logo_dark {
+
+   $z-ind : 100;
+   position: relative;
+   
+   h1, h2 {     	  
+	  @include put_above($z-ind);  
+   }
+   h1 {
+      text-transform: uppercase;  
+   }
+   h2 {    
+	  letter-spacing: -1px;
+      
+      span {
+	     color: $color-white;
+		 text-transform: uppercase;
+	  }
+   }
+   #dark_logo_pictures {
+      @include horizontal-list (g-base());
+	  margin-left: g-base(5);
+	  @include put_above($z-ind);
+   }
+   #dark_logo_square {
+      background: $color-darker-gray;
+      @include set_position( $logo-dark-square-coords);
+	  z-index: $z-ind;
+   }
+}
+
+//--------------------------------------
+//          light logo
+//--------------------------------------
+#dance_school_logo_light {
+
+   $zind : 100;
+   position: relative;
+   
+   h1, h2, h3 {     
+	  @include put_above($zind);  
+   }
+   h1 {
+      text-transform: uppercase;
+   }
+   h2 {
+      span {	     
+		 text-transform: uppercase;
+	  }
+   }
+   h3 {
+      color: $color-black;	
+   }
+
+   #light_logo_left_square, #light_logo_right_square {
+      background: $color-light;
+	  z-index: $zind;
+   }
+   
+   #light_logo_left_square {     
+      @include set_position( $logo-light-left-square-coords);
+	 
+   }
+  
+   #light_logo_right_square {   
+      @include set_position( $logo-light-right-square-coords);
+	 
+   }
+}
+
+/*-----------------------------------------------------
+    content page  - main page in section
+-----------------------------------------------------*/
+.short_article {
+
+   overflow: auto;
+   
+   .picture_in_text {
+   
+      overflow: hidden;
+   }
+}
+
+/*-----------------------------------------------------
+             content page  - list
+-----------------------------------------------------*/
+#fpl_content_wrap .news-list {
+   
+   .news-item {
+   
+      @if $global-debug-mode {
+         outline: solid 1px red;
+      }
+	  
+	  &:nth-child(2n+1) {
+	  
+	     border: solid 1px $color-light4;
+		 border-top: none;
+	  }
+	  &:first-child {
+	     border-top: solid 1px $color-light4;
+	  }
+	  
+      .news-item-picture {
+	     
+		 overflow: hidden;
+		 position: relative;
+		 height:   g-base(22);
+		 
+		 @if $global-debug-mode {
+			 outline: solid 1px green;
+		 }
+		 
+         a {	     
+			position: absolute;
+			right: -10%;
+			
+	        img {
+		 
+		    }
+	     }
+	  }
+	
+	  .news-item-text {
+	     @include deco_anchor( inherit);
+		 
+		 .detail_link {
+		    display: block;
+		    @include deco_anchor_this($color-red);
+		 }
+	  }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

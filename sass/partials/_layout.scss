@@ -1,0 +1,409 @@
+
+
+/*-----------------------------------------------------------------
+                       implement layout
+-----------------------------------------------------------------*/
+
+@include establish_baseline;
+
+html {
+
+   @include adjust-leading-to($p-line-mul);
+}
+
+//-----------------------------------
+#fpl_header_and_contents_container {
+
+   @include container;
+  
+}
+//--------------------------------------
+//            top block
+//--------------------------------------
+#fpl_top_block {
+
+   height: $top-block-height;
+   padding-top: $top-block-top-padding;
+   
+   @include put_blocks_in_line( $top-menu-block, 
+                                $top-mail-block, 
+								$top-search-block);
+								
+   @include inline_form;
+   
+   //-----------------------								
+   #fpl_top_menu ul {
+   
+      @include set_block_font_size_and_trailing( $top-menu-params);
+   }   
+   //-----------------------
+   #fpl_top_mail {
+   
+      @include set_block_font_size_and_trailing( $top-mail-params);
+   
+      @include put_blocks_in_line( $top-mail-block-icon, $top-mail-block-text);
+   }
+   //-----------------------
+   #fpl_search {
+   
+      @include set_block_font_size_and_trailing( $top-search-params);
+   
+      @include put_blocks_in_line( $top-search-input-field, $top-search-button);
+   }
+}
+
+//--------------------------------------
+//           top banner
+//--------------------------------------
+#fpl_top_banner {
+
+   height: $banner-height;
+   position: relative;
+   
+     
+   #fpl_banner_beetle {  
+      @include set_position( $beetle-coords);   
+   }
+   
+   #fpl_banner_leaf {     
+	  @include set_position( $leaf-coords);
+   }
+   
+   #fpl_banner_contacts_text {  
+      @include set_position( $contacts-text-coords);
+   }
+}
+
+//------------------------------------------------
+//         main page - top control block
+//------------------------------------------------
+#fpl_mainpage_top_control_block {
+
+   @if $global-debug-mode {
+      height: 300px;
+   }
+   margin-bottom: $top-control-block-margin-bottom;
+}
+
+//--------------------------------------
+//    left main menu (main)
+//--------------------------------------
+#fpl_mainpage_mainmenu {
+
+   @include span-columns( $left-block-main, $total-columns);
+   @include pre( $left-block-main-pre, $total-columns);
+   @include post( $left-block-main-post, $total-columns);
+   
+   ul {
+      @include set_block_font_size_and_trailing( $main-menu-params);
+   }
+}
+
+//--------------------------------------
+//      recent news (main)
+//--------------------------------------
+#fpl_mainpage_recent_widget {
+
+   @include span-columns( $right-widget-block-main omega, $total-columns);
+   
+   .widget_item {
+      @include span-columns( $right-widget-item, $right-widget-block-main);
+	  @include pre( $right-widget-pre, $right-widget-block-main);
+	  @include post( $right-widget-post, $right-widget-block-main);
+	  
+	  div, p {
+	      @include set_block_font_size_and_trailing( $right-widget-text-params);
+	  }
+   }
+}
+
+//----------------------------------------------------
+//          all pages - left control block
+//----------------------------------------------------
+#fpl_left_control_block {
+
+   @include span-columns( $left-block, $total-columns)
+}
+
+//--------------------------------------
+//          left main menu
+//--------------------------------------
+#fpl_mainmenu ul {
+
+   @include set_block_font_size_and_trailing( $main-menu-params);
+}
+
+//--------------------------------------
+//          left faq menu
+//--------------------------------------
+#fpl_faq_menu {
+
+   h1, h3 {
+      @include set_block_font_size_and_trailing ($menu-header-params);
+   }
+   ul {
+      @include set_block_font_size_and_trailing( $faq-menu-params);
+   }
+}
+
+//--------------------------------------
+//           left banner
+//--------------------------------------
+#fpl_left_banner {
+}
+
+//--------------------------------------
+//        left dynamic menu
+//--------------------------------------
+#fpl_dynamic_menu {
+
+   h1, h3 {
+      @include set_block_font_size_and_trailing ($menu-header-params);
+   }
+   
+   ul {
+      @include set_block_font_size_and_trailing( $dynamic-menu-params);
+   }
+}
+
+//--------------------------------------
+//     content block (main)
+//--------------------------------------
+#fpl_content_wrap_main {
+
+   @include span-columns ($total-columns, $total-columns);
+  
+}
+
+//--------------------------------------
+//     content block 
+//--------------------------------------
+#fpl_content_wrap {
+
+   @include span-columns ( $right-block omega, $total-columns);
+
+}
+
+//--------------------------------------
+//         footer
+//--------------------------------------
+
+#fpl_footer {
+   
+   @include container;   
+   padding-top: $footer-top-padding;
+   
+   //-----------------------------------  
+   //           footer menu
+   //-----------------------------------    
+   #fpl_footer_menu {
+      
+	  
+	  @include horizontal-list-even( $footer-menu-item-width);
+	  @include centered_block( $footer-menu-width, $footer-menu-height);
+	  
+	  @include set_block_font_size_and_trailing( $footer-menu-params);
+
+   }
+   //-----------------------------------  
+   //           footer social
+   //-----------------------------------    
+   #fpl_footer_social_icons {
+   
+      @include horizontal-list($footer-social-icons-spacing);
+      @include centered_block( $footer-social-icons-width); 
+	  
+	 
+ 	  
+   }
+   //-----------------------------------  
+   //           footer copyright
+   //-----------------------------------    
+   #fpl_footer_copyright {
+   
+      @include centered_block ( $footer-copyright-width);   
+	  @include adjust-font-size-to( $menu-font-size, $p-line-mul);
+   }
+   //-----------------------------------  
+   //           footer qr-code
+   //-----------------------------------   
+   #fpl_footer_qr_code {
+      @include float-right;
+	  margin-top: -1* els-sprite-height(qrcode);
+   }
+}
+
+/*-----------------------------------------------------------------------------
+                             main page layout
+-----------------------------------------------------------------------------*/
+
+@mixin zpre {
+   @include pre($main-content-columns-pre, $total-columns); 
+}
+
+//---------------------
+#main_first_col {
+   @include span-columns ($main-content-first-column, $total-columns);
+   @include zpre;
+}
+
+#main_central_col {
+   @include span-columns ($main-content-central-column, $total-columns);
+   @include zpre;
+}
+
+#main_second_col {
+   @include span-columns ($main-content-second-column, $total-columns);
+   @include zpre;
+}
+
+#main_third_col {
+   @include span-columns ($main-content-third-column, $total-columns);
+   @include zpre;
+}
+
+//----------------------------------------------
+#fpl_content_wrap_main {
+
+   p {   
+      @include set_block_font_size_and_trailing( $std-text-params);
+   }	
+   
+   h2 {
+      @include set_block_font_size_and_trailing( $hello-header-params);
+   }
+   h3 {    
+      @include set_block_font_size_and_trailing( $widget-header-params);
+   }
+   
+   h3.special {  
+      @include set_block_font_size_and_trailing( $special-header-params);
+   }
+}
+
+
+
+/*----------------------------------------------------------------------------
+                           content pages layout
+----------------------------------------------------------------------------*/
+#fpl_content_wrap {
+
+   p {   
+      @include set_block_font_size_and_trailing( $std-text-params);
+   }
+}
+
+//-----------------------------------------
+//           content headers
+//-----------------------------------------
+.content-abstract-header {
+
+   @include set_block_font_size_and_trailing( $content-headers-params); 
+
+}
+
+//-----------------------------------------
+#dance_school_logo_dark {
+
+   @extend .content-abstract-header;
+   
+   @include padding-trailer ( $logo-dark-padding-trailer, 
+                              $content-headers-font-size);  
+   
+   h1 {
+	  @include adjust-font-size-to( $header-font-size, 6);
+   }
+   h2 {
+      @include adjust-font-size-to( $header-font-size - 1, 5);  
+   }
+}
+//-----------------------------------------
+#dance_school_logo_light {
+
+   @extend .content-abstract-header;
+
+   @include margin-leader( $logo-light-margin-leader, 
+                           $content-headers-font-size);
+						   
+   h1 {   
+	  @include adjust-font-size-to( $header-font-size, 5);	  
+   }
+   h2 {
+      @include adjust-font-size-to( $header-font-size - 1, 5);
+	  @include margin-trailer( 3, $header-font-size - 1);
+   }
+   h3 {     
+	  @include adjust-font-size-to( $header2-font-size, 4 ); 
+   }					   
+}
+
+/*-----------------------------------------------------
+           section welcome page
+-----------------------------------------------------*/
+.short_article {
+
+   @include set_block_font_size_and_trailing( $short-article-params);
+ 
+   .picture_in_text {
+   
+      @include span-columns( $sa-picture-column, $content-block);
+	  @include post( $sa-col-divider, $content-block);	  	  
+   }
+   
+   p {
+      @include span-columns( $sa-text-column, $content-block);
+   }
+}
+
+/*-----------------------------------------------------
+             content page  - items list
+-----------------------------------------------------*/
+#fpl_content_wrap .news-list {
+
+   .news-item {
+   
+      @include span-columns( $list-item-block, $content-block);
+	  
+	  @include set_block_font_size_and_trailing( $list-item-params, true);
+	  @include min-height(g-base(30));
+  
+	  &:nth-child(2n+1) {
+	  
+	     @include  pull(    $list-items-mover , $content-block);
+		 @include  prefix(  $list-items-mover , $content-block);
+		 @include  suffix(  $list-items-mover , $content-block);
+	     @include post(     $list-items-mover , $content-block);
+		 
+	     clear: left;
+	  }
+	  
+	  h3 {    
+	     @include margin-leader( $list-item-header-leader, 
+		                         $list-item-header-font-size);	
+	  
+		 @include set_block_font_size_and_trailing( $list-item-header-params);
+		 		  
+	  }
+	  
+      .news-item-picture {
+         @include span-columns(  $list-item-picture-column , $list-item-block);
+		 @include post(          $list-item-inner-divider ,  $list-item-block);
+	  }
+	  
+	  .news-item-text {	  
+	     @include span-columns(  $list-item-text-column  ,   $list-item-block);
+		 
+		 @include set_block_font_size_and_trailing( $std-text-params);
+		 @include pull_up( $std-text-params);
+		 
+		 .detail_link {
+		    @include margin-leader($std-line-mul, $std-font-size);
+		 }
+	 
+	  }
+   }
+}
+
+
+
+

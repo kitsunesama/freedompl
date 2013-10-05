@@ -1,0 +1,51 @@
+
+
+#fpl_top_mail_icon {
+   @include set-sprite(mail);
+}
+
+#fpl_search {
+   input[name=s] {
+      @include set-sprite(search);
+   }
+}
+//------------------------------------------------
+#fpl_banner_bg {
+   background-image: image-url("background.jpg");
+   background-repeat: no-repeat;
+   width: image-width("background.jpg");
+   height: image-height("background.jpg");
+}
+
+#fpl_banner_beetle {
+   @include set-sprite(beetle);
+}
+
+#fpl_banner_leaf {
+   @include set-sprite(leaf);
+}
+//------------------------------------------------
+#fpl_footer_social_icons {
+
+   .fpl_fb {
+      @include set-sprite(fb);
+   }
+   
+   .fpl_twitter {
+      @include set-sprite(twitter);
+   }
+   
+   .fpl_vk {
+      @include set-sprite(vk);
+   }
+}
+//------------------------------------------------
+#fpl_footer_qr_code {
+   .fpl_qrcode {
+      @include set-sprite(qrcode);
+   }
+}
+
+
+
+

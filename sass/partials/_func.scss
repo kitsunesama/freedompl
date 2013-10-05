@@ -1,0 +1,326 @@
+
+
+@import 'susy'; 
+
+$include-html-global-classes : false;
+$include-html-media-classes : false;  
+$include-html-button-classes : false;
+$include-html-grid-classes : false;
+
+@import "foundation/variables";
+@import "foundation/components/global";
+@import "foundation/components/thumbs";
+@import "foundation/components/buttons";
+@import "foundation/components/grid";
+
+@import "compass/utilities/general";
+@import "compass/typography";
+@import "compass/layout/grid-background";
+@import "compass/typography/vertical_rhythm";
+@import "compass/css3";
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+@function g-base($size: 1) {
+   @return $g-base-size * $size;
+}
+
+
+
+//--------------------------------------------------------------
+//                    width of social bar
+//--------------------------------------------------------------
+@function social-bar-width($spacing) {
+
+   $w : 0;
+   @each $el in $social_icons {
+      $w : $w + els-sprite-width($el) + $spacing;
+   }
+   
+   @return $w;
+}
+//--------------------------------------------------------------
+//         calculate top margin to even sprite in line
+//--------------------------------------------------------------
+@function sprite-top-margin($line-height, $sprite) {
+
+   @return round((($base-line-height*$line-height)- els-sprite-height($sprite))/2);
+}
+
+//--------------------------------------------------------------
+//                    put block into line
+//--------------------------------------------------------------
+@mixin put_block_in_line($block) {
+
+   $block_name : nth($block,1);
+   $float      : nth($block,2);
+   $width      : nth($block,3);
+   $margin     : nth($block,4);
+   
+   #{$block_name} {
+      @if $width!=false {
+	     width: $width;
+	  }
+   
+      @if $float!=false {
+         @if $float==left {
+	        @include float-left;
+		    @if $margin!=false {
+		       margin-right: $margin;
+		    }
+	     }
+	     @if $float==right {
+	        @include float-right;
+		    @if $margin!=false {
+		       margin-left: $margin;
+		    }
+	     }
+      }
+   }
+}
+
+//--------------------------------------------------------------
+//                put to 5 blocks into line
+//--------------------------------------------------------------
+@mixin put_blocks_in_line( $block1: false, $block2: false, 
+                           $block3: false, $block4: false, $block5: false) {
+
+   @if $block1!=false {
+      @include put_block_in_line($block1);
+   }
+   @if $block2!=false {
+      @include put_block_in_line($block2);
+   }
+   @if $block3!=false {
+      @include put_block_in_line($block3);
+   }
+   @if $block4!=false {
+      @include put_block_in_line($block4);
+   }
+   @if $block5!=false {
+      @include put_block_in_line($block5);
+   }   
+}
+
+//--------------------------------------------------------------
+//    set font-size, line-size and bottom margin (or padding)
+//--------------------------------------------------------------
+@mixin set_block_font_size_and_trailing($params, $padding: false) {
+
+   $font-size : nth($params, 1);
+   $line-mul  : nth($params, 2);
+   
+   $trailer   : nth($params, 3);
+
+   @include adjust-font-size-to( $font-size, $line-mul); 
+   
+   @if $trailer!=false {
+      @if $padding {
+	     @include padding-trailer( $trailer, $font-size);
+	  } @else {
+         @include margin-trailer( $trailer, $font-size);
+	  }
+   }
+}
+
+//--------------------------------------------------------------
+//        vertically align text block with picture
+//--------------------------------------------------------------
+@mixin pull-up( $params ) {
+
+   $font-size : nth($params, 1);
+   $line-mul  : nth($params, 2);
+   $line-size : g-base($line-mul);
+
+   margin-top: -1 * round(($line-size - $font-size)/2);
+}
+
+
+//--------------------------------------------------------------
+//      put element to specified absolute position
+//--------------------------------------------------------------
+@mixin set_position($coords) {
+
+   position: absolute;
+
+   @if nth($coords,1)!=false {
+      left: nth($coords,1);
+   }
+   @if nth($coords,2)!=false {
+      top: nth($coords,2);
+   }
+   @if nth($coords,3)!=false {
+      width: nth($coords,3);
+   }
+   @if nth($coords,4)!=false {
+      height: nth($coords,4);
+   }
+}
+
+//--------------------------------------------------------------
+//         anchor color/decoration shortcut
+//--------------------------------------------------------------
+@mixin deco_anchor($color, $color_hover:none) {
+   a {
+      @include deco_anchor_this ($color, $color_hover);
+   }
+}
+//--------------------------------------------------------------
+@mixin deco_anchor_this($color, $color_hover:none) {
+
+      color: $color;
+	  text-decoration: none;
+  
+	  &:hover {
+	     @if $color_hover==none {
+	        text-decoration: underline;
+		 } @else {
+		   color: $color_hover;
+		 }
+	  } 
+}
+
+//--------------------------------------------------------------
+//      style for form button with sprite on it
+//--------------------------------------------------------------
+@mixin picture_button {
+
+    border: none;
+	text-indent: -9999px;
+	cursor: pointer;
+}
+
+//--------------------------------------------------------------
+//         block anchor (in buttons or menus)
+//--------------------------------------------------------------
+@mixin block_anchor {
+   a {
+      display: block;
+	  width: 100%;
+	  height: 100%;
+   }
+}
+
+//--------------------------------------------------------------
+//       style form to fit in the line (search form)
+//--------------------------------------------------------------
+@mixin inline_form {
+   form {
+      margin: 0;
+   }
+}
+
+//----------------------------------------
+@mixin debug_bord($hue) {
+
+   $color4 : hsl($hue, 100%, 50%);
+   outline: solid 1px $color4;
+   background-color: rgba($color4, 0.4);
+   overflow: hidden;
+}
+//--------------------------------------------------------------
+//                    draw debug scaffolding
+//--------------------------------------------------------------
+@mixin draw_debug() {
+
+   @each $block in $container_blocks {    
+	  ##{$block} {  
+	  
+         $grid-background-baseline-height: 20px;
+         @include grid-background;
+	  }
+   }
+
+   $i : 0;
+   $step : 360/length($layout_blocks);
+   @each $block in $layout_blocks {
+      ##{$block} {
+         @include debug_bord($i);
+	     $i : $i+$step;
+      }
+   }
+   
+   @each $block in $vert_menu_blocks {
+      ##{$block} li {
+	     outline: solid 1px red;
+	  }
+   }
+}
+
+//--------------------------------------------------------------
+//       bullets in the right part of list 
+//--------------------------------------------------------------
+@mixin pretty-bullets-r($bullet-icon, $line-height: 18px) {
+  
+  $width : image_width($bullet-icon);
+  $height : image_height($bullet-icon);
+
+  li {
+    background: image-url($bullet-icon) no-repeat right ($line-height - $height) / 2;
+    list-style-type: none; 
+	} 
+}
+
+//--------------------------------------------------------------
+//      uppercase style of headers (menus in left column)
+//--------------------------------------------------------------
+@mixin uppercase_header($color) {
+   
+   font-family: #{$verdana-family};
+     
+   color: $color;
+   font-weight: normal;
+   text-transform: uppercase;
+}	
+
+//--------------------------------------------------------------
+//         centered block with specified width
+//--------------------------------------------------------------
+@mixin centered_block ($width: false, $height: false) {
+
+   margin: 0 auto;
+   margin-bottom: $footer-bottom-margins;
+   
+   @if $width!=false {
+      width: $width;
+   }
+   @if $height!=false {
+      height: $height;
+   }
+}
+
+//--------------------------------------------------------------
+//    horizontal list of items with equal width 
+//--------------------------------------------------------------
+@mixin horizontal-list-even ($item-width) {
+
+   @include horizontal-list(0);
+ 
+	  li {
+         width: $item-width;
+        
+      }
+}
+
+//--------------------------------------------------------------
+//       put the sprite on the block
+//--------------------------------------------------------------
+@mixin set-sprite($name) {
+
+      display: block;
+
+      @include els-sprite($name); 
+	  height: els-sprite-height($name);
+	  width: els-sprite-width($name);
+	  
+}	
+
+//--------------------------------------------------------------
+@mixin put_above($z-index) {
+
+   position: relative;
+   z-index: $z-index+10;
+}
+
+
+	

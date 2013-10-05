@@ -1,0 +1,283 @@
+
+$color-bordo :       #8a2931;
+$color-bright-bordo: #8d1c24;
+$color-light-bordo : #a32d3d;
+$color-red :         #ee0000;
+
+$color-dark-violet : #3f275d;
+
+$color-darker-gray : #323232;
+$color-dark-gray :   #383838;
+$color-light-gray :  #666666;
+$color-light4-gray : #616161;
+
+$color-light   : #e9e9e9;
+$color-light4  : #c4c4c4;
+
+$color-black : black;
+$color-white : white;
+
+$georgia-family: "georgia, serif";
+$verdana-family: "verdana, helvetica, sans-serif";
+$tahoma-family:  "tahoma, sans-serif";
+$times-family: "Times New Roman, serif";
+
+$header-font-size   : 36px;
+$header2-font-size  : 30px;
+$header3-font-size  : 24px;
+$menu-font-size     : 14px;
+$p-font-size        : 12px;
+
+$big-font-size      : 48px;
+$medium4-font-size  : 22px;
+$medium-font-size   : 27px;
+$special-font-size  : 20px;
+
+$g-base-size : 10px;
+
+//-------------------------------------------
+
+$total-columns: 110;
+$column-width: g-base();
+$gutter-width: 0px;
+$grid-padding: 0px;
+
+$std-col-divider: 2;
+$big-col-divider: 4;
+
+//-------------------------------------------
+$base-font-size: 16px;
+$base-line-height: g-base();
+$p-line-height: $base-line-height*2;
+$p-line-mul: 2;
+$m-line-mul: 3;
+
+
+//----------------------------------------------------
+//                     blocks
+//----------------------------------------------------
+
+$container_blocks: (fpl_header_and_contents_container, fpl_footer);
+
+$layout_blocks: (fpl_top_block, fpl_top_banner, fpl_mainpage_top_control_block,
+                 fpl_mainpage_mainmenu, fpl_mainpage_recent_widget, fpl_left_control_block,
+                 fpl_mainmenu, fpl_faq_menu, fpl_left_banner, fpl_dynamic_menu,
+                 fpl_content_wrap_main, fpl_content_wrap);
+
+$footer_blocks: (fpl_footer_menu, fpl_footer_social_icons,
+                 fpl_footer_copyright, fpl_footer_qr_code);
+
+$top_blocks:    (fpl_top_menu, fpl_top_mail, fpl_search);
+
+$vert_menu_blocks:  fpl_mainmenu fpl_mainpage_mainmenu fpl_faq_menu fpl_dynamic_menu;
+$horz_menu_blocks:  fpl_top_menu fpl_footer_menu;
+
+$all_menu_blocks:   join( $vert_menu_blocks, $horz_menu_blocks);
+
+$main_menus:    fpl_mainmenu fpl_mainpage_mainmenu;
+
+$social_icons: fb twitter vk;
+
+//----------------------------------------------------
+//               common variables
+//----------------------------------------------------
+//----------------------
+//      top block
+//----------------------
+$top-block-full-height: g-base(6);
+$top-block-top-padding: g-base(2);
+$top-block-height: $top-block-full-height - $top-block-top-padding;
+
+$top-line-mul: 2;
+
+//------------------------
+//       top menu
+//------------------------
+$top-menu-block:   ("#fpl_top_menu", left,   g-base(52), g-base(3));
+
+$top-menu-params     : $menu-font-size  $top-line-mul  false;
+
+//------------------------
+//      top mail
+//------------------------
+$top-mail-block:   ("#fpl_top_mail", left,   g-base(18), false);
+
+$top-mail-params     : $p-font-size  $top-line-mul  false;
+
+   $top-mail-block-icon:  ("#fpl_top_mail_icon", left, false, g_base());
+   $top-mail-block-text:  ("#fpl_top_mail_text", left, false, false);
+
+//------------------------
+//     top search
+//------------------------   
+$search-block-width: 230px;
+$search-block-input-right-margin: g-base(1);
+
+$search-block-input-width:  $search-block-width - 
+                            els-sprite-width(search) - 
+							$search-block-input-right-margin;
+
+$top-search-block: ("#fpl_search",   right,  $search-block-width, false);
+
+$top-search-params     : $menu-font-size  $top-line-mul  false;
+
+   $top-search-input-field: ("input[name=q]", left, 
+                              $search-block-input-width,
+							  $search-block-input-right-margin);
+                            
+   $top-search-button:  ("input[name=s]", left, false, false);
+
+//----------------------
+//       banner
+//----------------------
+$banner-height: 280px;
+
+$beetle-coords         : 0 g-base(14) false false;
+$leaf-coords           : g-base(60) g-base(10) false false;
+$contacts-text-coords   : g-base(80) g-base(14) g-base(24) false;
+
+
+//----------------------
+//       footer
+//----------------------
+$footer-top-padding:     g-base(2);
+$footer-bottom-margins:  g-base();
+
+$footer-menu-item-width: g-base(18);
+$footer-menu-items: 5;
+$footer-menu-height:     g-base(2);
+$footer-menu-width: $footer-menu-item-width * $footer-menu-items;
+
+$footer-menu-params:   $menu-font-size    $p-line-mul false;
+
+$footer-social-icons-spacing: round(g-base()/2);
+$footer-social-icons-width: social-bar-width($footer-social-icons-spacing*2);
+
+$footer-copyright-width: round($footer-menu-width/2);
+
+//-------------------------------------------------------------------------
+//                   general layout on main page
+//-------------------------------------------------------------------------
+
+$top-control-block-margin-bottom: g-base(2);
+
+//--------------------------------------
+$left-block-main: 24;
+$left-block-main-pre: $std-col-divider;
+$left-block-main-post: 0;
+$right-widget-block-main: $total-columns - 
+                          $left-block-main - 
+                          $left-block-main-pre - 
+						  $left-block-main-post;
+
+//-------------------------------------------------------------------------
+//                   general layout on other pages
+//-------------------------------------------------------------------------
+
+$left-block: 24;
+$left-block-post: 9;
+
+$right-block: $total-columns - $left-block - $left-block-post;
+
+//-------------------------------------------------------------------------
+//                    content layout on main page
+//-------------------------------------------------------------------------
+//--------------------------------------
+//     widget news (main)
+//--------------------------------------
+$right-widget-item: 19;
+$right-widget-pre: $std-col-divider;
+$right-widget-post: 0;
+
+ $image-area-height :         g-base(14);
+ $image-area-bottom-padding:  g-base(2);
+ $image-height: $image-area-height - $image-area-bottom-padding;
+ 
+ $right-widget-text-params   :  $p-font-size  $p-line-mul $p-line-mul;
+
+//--------------------------------------
+//          content (main)
+//--------------------------------------
+$main-content-columns-pre: $std-col-divider;
+
+$main-content-first-column: 24;
+$main-content-central-column: 40;
+$main-content-second-column: 19;
+$main-content-third-column: 19;
+
+$main-content-widget-min-height: 290px;
+
+$hello-header-params     :  $big-font-size      5 $m-line-mul;
+$widget-header-params    :  $medium-font-size   $m-line-mul $p-line-mul;
+$special-header-params   :  $special-font-size  $p-line-mul $p-line-mul;
+
+
+//-------------------------------------------------------------------------
+//                    content layout on other pages
+//-------------------------------------------------------------------------
+//--------------------------------------
+//          left menus
+//--------------------------------------
+$menu-header-params  : $header3-font-size $m-line-mul $m-line-mul;
+
+$main-menu-params    : $menu-font-size  $m-line-mul 4;
+$faq-menu-params     : $p-font-size     $m-line-mul 6;
+$dynamic-menu-params : $menu-font-size  $p-line-mul $p-line-mul;
+
+
+//---------------------------------------------------------
+//                    content area
+//---------------------------------------------------------
+
+$content-block           :  $right-block;
+
+$std-font-size   : $p-font-size;
+$std-line-mul    : $p-line-mul;
+$std-trailer     : $std-line-mul;
+
+$std-text-params         :  $std-font-size  $std-line-mul  $std-trailer;
+
+//--------------------------------------
+//         content headers
+//--------------------------------------
+$content-headers-font-size  : $base-font-size;
+$content-headers-params   :  $content-headers-font-size    $p-line-mul $p-line-mul;
+
+$logo-dark-padding-trailer   : $p-line-mul;
+$logo-light-margin-leader  : $m-line-mul;
+
+$logo-dark-square-coords :        g-base(21) g-base(6) g-base(53) g-base(16);
+$logo-light-left-square-coords:   0  g-base(13) 225px g-base(4);
+$logo-light-right-square-coords:  225px g-base(5) g-base(22) g-base(8);
+
+//--------------------------------------
+//         section welcome page
+//--------------------------------------
+$short-article-params    :  $base-font-size    $p-line-mul $p-line-mul;
+$sa-picture-column  : 35;
+$sa-col-divider     : $big-col-divider;
+$sa-text-column     : $content-block - $sa-picture-column - $sa-col-divider;
+
+//--------------------------------------
+//         section items list
+//--------------------------------------
+
+$list-items-divider : $big-col-divider;
+$list-item-block : floor(($content-block - $list-items-divider)/2);
+
+$list-items-mover : $list-items-divider/2;
+
+$list-item-params          :  $base-font-size     $p-line-mul 1;
+
+$list-item-header-font-size : $header3-font-size;
+$list-item-header-params   :  $list-item-header-font-size $m-line-mul 1;
+$list-item-header-leader   :  $p-line-mul;
+
+$list-item-inner-divider        : $big-col-divider;
+$list-item-picture-column       : 16;
+$list-item-text-column   : $list-item-block - 
+                           $list-item-picture-column -
+						   $list-item-inner-divider;
+
+
+
